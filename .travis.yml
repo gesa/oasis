@@ -1,24 +1,27 @@
 language: node_js
 node_js:
-  - '0.10'
-
+- '0.10'
 sudo: false
-
 cache:
   bundler: true
   npm: true
   directories:
-  - .vendor
-
+  - ".vendor"
 before_install:
-  - gem install bundler
-
+- gem install bundler
 install:
-  - npm install
-
+- npm install
 before_script:
-  - npm test
-  - npm run precommit
-
+- npm test
+- npm run precommit
 script:
-  - npm run build
+- npm run build
+deploy:
+  provider: s3
+  access_key_id: AKIAIUXBXSID72SPGXBQ
+  secret_access_key:
+    secure: NMt0vr25o3pj3PWagNRZWK2M1Wzz7ZYlLoes7gDIbLEeLpRfx3S55xqxnmscOs41hoMaiTDZ+HFDg1vajkis3Is982z7PRaQl7hpBWoMmeZtZodipeN0Yahyb2d3sM5sn6V9LLya8r67HHFFLwOZHs8futZvi0sUKE/MPP0Nkmf6e1S59T+bm4NcC7RiRPLqHPNVYJnvdsqDr8Slhr+iNvW2O3KHEN3xCvcbL1vo/wVxmEhmQU3N2cP8V4SplOPq1qUm4XoMbIFFLqw1fK0FR+vXPIVW519pJqDYTEX1y17ahBwVMz784WPqP6cIsG4/Jut4/BZeRNGJAqwPByEJcKps12B/RSRmPVDZDurt1WjmmUiSQmUYTEsB0uvOdOyqeueCwV7W3NsNID1kTu6YFgHGnTO0JT5PUpp72UbR+SInK9/PQZY3SppUBYbhavoH26GuHp78vTbdKS2FF25lmjnNFtuzLI5xNuwMCwSXozx7cJI7rAc+4k3jjf/nhxkrc/HOin1D8aj4hZrUwOGTEM6KGv7ni0cxFZns2ZCMBw/53ll5saAuWA54VKDXp4LzhojHhjp1joaivWYpHDodyFVZMqKptnXG45NsAgNhiCUuFMyVCFq2oKlqRx6TMBiHrGDFgK4RGCYYZIjbrT9n11NSkabZTyL8nk0ONaF44yw=
+  bucket: curioussage.com
+  acl: ''
+  on:
+    repo: gesa/oasis
