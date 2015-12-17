@@ -39,3 +39,5 @@ Deploy to S3 using travis by running `travis setup s3` on the command line
     - [ ] `og:image` (don’t forget dimensions)
     - [ ] `twitter:image:src`
     - [ ] `itemprop="image"`
+    - [ ] authors
+    - [ ] where we've been

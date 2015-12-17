@@ -21,6 +21,7 @@
   <meta property="og:locale:alternate" content="en_GB"/>
   <meta property="og:title" content="{{ title }}"/>
   <meta property="og:description" content="{{ description }}"/>
+  <meta property="og:url" content="{{ page.url | prepend: site.baseurl | remove:'index.html' }}" />
 
   <!-- twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -35,9 +36,10 @@
   <meta itemprop="name" content="{{ title }}">
   <meta itemprop="description" content="{{ description }}">
   <meta itemprop="image" content="{{ image }}">
+  <link rel="publisher" href="https://plus.google.com/{{ site.author.googleid }}">
 <!-- /*** social meta *** -->
 
-<link rel="publisher" href="https://plus.google.com/{{ site.author.googleid }}">
+<link rel="canonical" href="{{ page.url | remove:'index.html' | prepend: site.baseurl }}" />
 
-<link rel="icon" type="image/png" href="{{ site.url }}{{ site.favicon }}"/>
+<link rel="icon" type="image/png" href="{{ site.favicon | prepend: site.baseurl }}"/>
 <link rel="stylesheet" type="text/css" href="/css/core.css">

@@ -15,7 +15,7 @@ layout: none
     {% endfor %}
     {% if post.sitemap != false and current_post != false %}
       <url>
-        <loc>{{ site.url }}{{ post.url | remove: 'index.html' }}</loc>
+        <loc>{{ post.url | remove: 'index.html' | prepend: site.baseurl }}</loc>
         {% if post.lastmod == null %}
         <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
         {% else %}
@@ -30,7 +30,7 @@ layout: none
     {% if site.data.sitemap.blocked.pages contains page.url or site.data.sitemap.blocked.categories contains page.parent %}
     {% elsif page.sitemap != 'false' %}
     <url>
-      <loc>{{ site.url }}{{ page.url | remove:'index.html' }}</loc>
+      <loc>{{ page.url | remove:'index.html' | prepend: site.baseurl }}</loc>
       {% if page.sitemod.lastmod == null %}<lastmod>
         {{ site.time | date_to_xmlschema }}</lastmod>
       {% else %}

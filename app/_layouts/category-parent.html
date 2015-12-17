@@ -1,0 +1,22 @@
+---
+layout: long-haul
+---
+<h1>{{ page.category }}</h1>
+
+{% unless content == '' %}
+{{ content }}
+{% endunless %}
+
+<ol class="post-list">
+{% for post in site.categories.[page.category] %}
+  {% unless post.private == true %}
+  <li>
+    <a href="{{ post.url }}">
+      <h2>{{ post.title }}</h2>
+      <time datetime='{{ post.date | date:"%FT%H:%M:$S" }}'>{{ post.date | date:"%B %d, %Y" }}</time>
+    </a>
+    {{ post.excerpt }}
+  </li>
+  {% endunless %}
+{% endfor %}
+</ol>

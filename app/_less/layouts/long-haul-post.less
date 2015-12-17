@@ -1,0 +1,30 @@
+.post {
+  header {
+    @media screen and (min-width: @small-phone) {
+      align-items: baseline;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  time {
+    min-width: 12rem;
+  }
+  > p {
+    &:first-of-type {
+      font-size: 1.25em;
+      line-height: 1.7;
+      &:first-letter {
+        color: @green-400;
+        float: left;
+        font-family: @serifFont;
+        font-size: 8rem;
+        line-height: 0;
+        padding-top: 4rem;
+      }
+    }
+  }
+}
+
+
+
+

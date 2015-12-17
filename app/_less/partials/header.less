@@ -1,0 +1,48 @@
+.main-header {
+  background-image: url('/img/headers/pano-from-google-rock.jpg');
+  background-position: center 65%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  position: relative;
+  text-transform: uppercase;
+  &::after {
+    border-bottom: 0 solid transparent;
+    border-right: 100vw solid aliceblue;
+    border-top: 5rem solid transparent;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+  }
+  a {
+    color: @white;
+    display: inline-block;
+    background-color: fade(@green-400, 50%);
+    transition: background-color 200ms;
+    &:link, &:visited {
+      text-decoration: none;
+    }
+    &:hover, &:active, &:focus {
+      background-color: @green-400;
+    }
+  }
+
+  h1 {
+    a {
+      margin: 2rem 0;
+      padding: 0 1.6rem;
+    }
+  }
+  nav {
+    a {
+      padding: 0 1.2rem;
+      &:hover, &:active, &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}

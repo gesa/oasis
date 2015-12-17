@@ -65,12 +65,12 @@ module.exports = function (grunt) {
     less: {
       options: {
         compress: true,
-        files: {
-          '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
-        }
       },
       build: {},
       server: {
+        files: {
+          '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
+        },
         options: {
           compress: false,
           sourceMap: true
@@ -95,26 +95,21 @@ module.exports = function (grunt) {
         ]
       }
     },
-
     connect: {
-      options: {
-        hostname: '0.0.0.0',
-        livereload: 35728,
-        port: 9001,
-        middleware: function (connect, options, middlewares) {
-          middlewares.unshift(function (request, response, next) {
-            response.setHeader('Access-Control-Allow-Origin', '*');
-            response.setHeader('Access-Control-Allow-Methods', '*');
-            return next();
-          });
-          return middlewares;
-        },
-        useAvailablePort: true
-      },
-      livereload: {
+      server: {
         options: {
           base: '<%= site.dist %>',
-          open: true
+          hostname: '0.0.0.0',
+          port: 9001,
+          middleware: function (connect, options, middlewares) {
+            middlewares.unshift(function (request, response, next) {
+              response.setHeader('Access-Control-Allow-Origin', '*');
+              response.setHeader('Access-Control-Allow-Methods', '*');
+              return next();
+            });
+            return middlewares;
+          },
+          useAvailablePort: true
         }
       }
     },
@@ -138,14 +133,6 @@ module.exports = function (grunt) {
           '<%= site.app %>/**/*.{xml,html,yml,md,mkd,markdown,txt}'
         ],
         tasks: ['jekyll:server', 'concurrent']
-      },
-      livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
-        files: [
-          '<%= site.dist %>/**/*.*'
-        ]
       }
     },
 
@@ -261,7 +248,7 @@ module.exports = function (grunt) {
     'clean:server',
     'jekyll:server',
     'concurrent:server',
-    'connect:livereload',
+    'connect',
     'watch'
   ]);
 
