@@ -1,4 +1,4 @@
-# Static Site Boilerplate
+# To the oasis!
 
 ## Running the server, building the site
 
@@ -33,23 +33,9 @@ npm test
 Deploy to S3 using travis by running `travis setup s3` on the command line
 
 
-## Customising the site
+## TODO
 
-- Add your meta info to `package.json`!
-- Add any disallowed content to `app/_data/sitemap.xml`
-- Update your `404.md`
-- Add all the  touch icons
-- (optional) Setup travis S3 deploy with `travis setup s3` on the CLI
-- Add any scripts you’re using to `concat` at L152 in `Gruntfile.js` 
-- Pay special attention to `app/_includes/partials/meta.html`
-    - `og:determiner`, if you need a “the” before your page title
-    - `og:locale` if you’re not located in the US or GB
-    - `twitter:site` is your twitter username, including `@`
-    - Save logo file, then update the following with fully qualified url
-        - `og:image` (don’t forget dimensions)
-        - `twitter:image:src`
-        - `itemprop="image"`
-- Markup:
-    - `app/_includes/partials/header.html`
-    - `app/_includes/partials/footer.html`
-- `app/_includes/partials/scripts.html` can probably be ignored, in favor of `grunt concat`
+- Save logo file, then update the following with fully qualified url
+    - [ ] `og:image` (don’t forget dimensions)
+    - [ ] `twitter:image:src`
+    - [ ] `itemprop="image"`
