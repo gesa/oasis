@@ -159,7 +159,6 @@ module.exports = function (grunt) {
           {
             dest: '<%= site.dist %>/js/scripts.js',
             src: [
-              'node_modules/jquery/dist/jquery.min.js',
               '<%= site.app %>/_js/core.js'
             ]
           }
