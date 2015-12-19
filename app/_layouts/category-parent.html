@@ -1,15 +1,17 @@
 ---
 layout: long-haul
 ---
-<h1>{{ page.category }}</h1>
 
-{% unless content == '' %}
+{% capture category %}{{ page.dir | replace:'/' }}{% endcapture %}
+
+{% if content == '' %}
+<h1>{{ category | capitalize }}</h1>
+{% else %}
 {{ content }}
-{% endunless %}
+{% endif %}
 
 <ol class="post-list">
-{% for post in site.categories.[page.category] %}
-  {% unless post.private == true %}
+{% for post in site.categories.[category] %}
   <li>
     <a href="{{ post.url }}">
       <h2>{{ post.title }}</h2>
@@ -17,6 +19,5 @@ layout: long-haul
     </a>
     {{ post.excerpt }}
   </li>
-  {% endunless %}
 {% endfor %}
 </ol>
