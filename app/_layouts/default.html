@@ -1,14 +1,13 @@
 <!doctype html>
-<html class="no-js">
+<html>
 <head>
 {% include partials/meta.html %}
 </head>
-<body class="">
-<main class="content">
+<body {% if page.class %}class="{{ page.class }}"{% endif %}>
+{% include partials/header.html %}
+<main {% if page.full-width %}class="full-width"{% endif %}>
   {{ content }}
 </main>
-{% include partials/header.html %}
-{% include partials/navigation.html %}
 {% include partials/footer.html %}
 {% include partials/scripts.html %}
 </body>

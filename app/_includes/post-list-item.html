@@ -1,0 +1,8 @@
+{% assign post = include.post %}
+<li>
+  <a href="{{ post.url }}">
+    <h2 id="{{ post.title | slugify }}">{{ post.title }}</h2>
+    <time datetime='{{ post.date | date:"%FT%H:%M:$S" }}'>{{ post.date | date:"%B %d, %Y" }}</time>
+  </a>
+  {{ post.excerpt }}
+</li>

@@ -1,23 +1,17 @@
 ---
-layout: long-haul
+layout: default
 ---
 
 {% capture category %}{{ page.dir | replace:'/' }}{% endcapture %}
 
 {% if content == '' %}
-<h1>{{ category | capitalize }}</h1>
+<h2 id="{{ category | slugify }}">{{ category | capitalize }}</h2>
 {% else %}
 {{ content }}
 {% endif %}
 
 <ol class="post-list">
 {% for post in site.categories.[category] %}
-  <li>
-    <a href="{{ post.url }}">
-      <h2>{{ post.title }}</h2>
-      <time datetime='{{ post.date | date:"%FT%H:%M:$S" }}'>{{ post.date | date:"%B %d, %Y" }}</time>
-    </a>
-    {{ post.excerpt }}
-  </li>
+  {% include post-list-item.html post=post %}
 {% endfor %}
 </ol>

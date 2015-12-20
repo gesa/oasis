@@ -1,6 +1,5 @@
 ---
 date: 2015-03-21T21:21:00
-layout: long-haul-post
 preface: '> *note: I use the term “own” regarding land in this piece. I’m actually wary of the concept that anyone can “own” land, but for brevity, it’s the term I use here.*'
 author: aki
 ---
