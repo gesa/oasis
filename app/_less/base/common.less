@@ -2,19 +2,23 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
 html, body {
   font-size: 62.5%;
-  height: 100%;
 }
 
 body {
   background-color: @white;
+  border-bottom: solid 2rem @green-400;
+  border-top: solid 2rem @green-400;
   color: @black;
   font-family: @copyFont;
   font-size: 1.8rem;
-  line-height: 1.5;
+  line-height: 1.4;
   margin: 0;
-  position: relative;
+  min-height: 100%;
 
   @media print {
     font-size: 1.6 * 0.8rem;
@@ -23,9 +27,10 @@ body {
     padding-top: 0;
   }
 }
+
 a {
-  color: fade(@green-400, 90%);
-  transition: color 200ms;
+  color: fade(@green-400, 80%);
+  transition: color 250ms;
   &:link, &:visited {
     text-decoration: none;
   }
@@ -33,7 +38,6 @@ a {
     color: @green-400;
   }
 }
-
 
 b {
   font-weight: inherit;
@@ -44,6 +48,14 @@ blockquote {
 }
 
 figure {
+  margin: 0;
+  @media screen and (min-width: @large-phone) {
+    margin: 1rem;
+  }
+  figcaption {
+    font-size: 0.9em;
+    font-style: italic;
+  }
   img {
     display: block;
     margin: 0 auto;
@@ -51,12 +63,21 @@ figure {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: @displayFont;
   margin: 0;
 }
 
 h1 {
-  font-family: @displayFont;
   font-size: 4.8rem;
+}
+
+header p {
+  margin-top: 0;
+}
+
+hr {
+  border: dotted @green-400 0.2rem;
+  max-width: 90%;
 }
 
 i {
@@ -68,10 +89,23 @@ img {
   height: auto;
 }
 
+main {
+  margin: 0 auto;
+  max-width: 66ch;
+  padding: 0 1.5rem;
+  @media screen and (min-width: @small-phone) {
+    padding: 0 2rem;
+  }
+}
+
 p {
   margin: 1rem 0 2rem;
 }
 
 strong {
   font-weight: 400;
+}
+
+ul {
+  padding-left: 2rem;
 }

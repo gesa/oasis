@@ -3,13 +3,14 @@
   background-position: center 65%;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-bottom: 1rem;
   overflow: hidden;
   padding: 3rem 2rem 4rem;
   position: relative;
   text-transform: uppercase;
   &::after {
     border-bottom: 0 solid transparent;
-    border-right: 100vw solid aliceblue;
+    border-right: 100vw solid @white;
     border-top: 5rem solid transparent;
     bottom: 0;
     content: '';
@@ -21,16 +22,18 @@
     width: 0;
   }
   a {
+    border-radius: 0.4rem;
     color: @white;
     display: inline-block;
-    background-color: fade(@green-400, 50%);
-    border-radius: 0.4rem;
-    transition: background-color 200ms;
+    margin: 0 1rem 1rem 0;
+    padding: 0 1.2rem;
+    transition: background-color 250ms;
     &:link, &:visited {
-      text-decoration: none;
+      background-color: fade(@green-400, 40%);
     }
     &:hover, &:active, &:focus {
       background-color: @green-400;
+      text-decoration: none;
     }
   }
 
@@ -38,14 +41,6 @@
     a {
       margin: 2rem 0;
       padding: 0 1.6rem;
-    }
-  }
-  nav {
-    a {
-      padding: 0 1.2rem;
-      &:hover, &:active, &:focus {
-        text-decoration: underline;
-      }
     }
   }
 }

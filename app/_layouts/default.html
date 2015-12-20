@@ -8,7 +8,11 @@
 <main {% if page.full-width %}class="full-width"{% endif %}>
   {{ content }}
 </main>
+
+{% comment %}
 {% include partials/footer.html %}
+{% endcomment %}
+
 {% include partials/scripts.html %}
 </body>
 </html>
