@@ -144,10 +144,11 @@ module.exports = function (grunt) {
       server: {
         files: [
           {
-            dest: '<%= site.dist %>/js/scripts.js',
             src: [
+              '<%= site.app %>/_js/modules/image-modals.js',
               '<%= site.app %>/_js/core.js'
-            ]
+            ],
+            dest: '<%= site.dist %>/js/scripts.js'
           }
         ]
       }

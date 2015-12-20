@@ -9,7 +9,7 @@ floodplain, with a lush meadow and a seasonal creek, so close enough. I love it:
 it is home; it is a realization of a dream; it is the future.
 
 {% figure caption:"The view from our bedroom door" %}
-![A panorama taken from the front door of the camper](/img/2015/pano-from-camper-door.jpg)
+![A panorama taken from the front door of the camper](/img/2015/pano-from-camper-door.jpg){: .photograph }
 {% endfigure %}
 
 Have you ever worked toward a dream for so long that, once you get what you came
