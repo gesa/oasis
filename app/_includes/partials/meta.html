@@ -2,7 +2,6 @@
 {% capture fbtitle %}{% if page.share.title %}{{ page.share.title }}{% else %}{{ title }}{% endif %}{% endcapture %}
 {% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
 {% capture image %}{% if page.share.image %}{{ page.share.image }}{% else %}img/share/share.png{% endif %}{% endcapture %}
-{% capture author %}{{ page.author | downcase }}{% endcapture %}
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -25,19 +24,23 @@
   <meta property="og:url" content="{{ page.url | prepend: site.url | remove:'index.html' }}" />
 
   <!-- twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="{{ site.authors[author].twitter }}">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}"/>
   <meta name="twitter:image:src" content="{{ image }}">
   <meta name="twitter:domain" content="{{ site.url | remove:'http://' | remove:'https://' }}">
+{% comment %}
+  <meta name="twitter:site" content="{{ site.authors[author].twitter }}">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:account_id" content="{{ site.authors[author].twitterid }}"/>
+{% endcomment %}
 
   <!-- google+ -->
   <meta itemprop="name" content="{{ title }}">
   <meta itemprop="description" content="{{ description }}">
   <meta itemprop="image" content="{{ image }}">
+{% comment %}
   <link rel="publisher" href="https://plus.google.com/site.authors[author].googleid }}">
+{% endcomment %}
 <!-- /*** social meta *** -->
 
 <link rel="canonical" href="{{ page.url | remove:'index.html' | prepend: site.url }}" />

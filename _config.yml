@@ -8,12 +8,13 @@ url: 'http://curioussage.com'
 description: What the hell are you two going to do with 28 acres and an RV, anyway?
 timezone: America/Los_Angeles
 googleanalytics: UA-26097728-8
-author:
-  name: Aki Rose
-  email: hi@akiro.se
-  github: gesa
-  twitter: gesa
-  twitterid: 9321562  # Twitter account ID
+authors:
+  - name: Aki Rose
+    email: hi@akiro.se
+    github: gesa
+    twitter: gesa
+    twitterid: 9321562
+  - name: Mark
 share:
   width: 1200
   size: 1200
@@ -28,7 +29,7 @@ exclude: ['img']
 
 future: true
 show_drafts: true
-permalink: :categories/:title/
+permalink: /:categories/:year:month:day/:title/
 
 #############
 # Compiling #
@@ -37,7 +38,8 @@ permalink: :categories/:title/
 highlighter: rouge
 
 markdown: kramdown
-#kramdown:
+kramdown:
+  auto_ids: true
 #  input: GFM
 
 defaults:
@@ -45,17 +47,14 @@ defaults:
     scope:
       path: ''
     values:
-      layout: 'default'
-
-
-
+      layout: 'post'
 
 navigation:
- - title: Home
-   url: /index.html
- - title: About
-   url: /about
- - title: Contact
-   url: /contact
-
-google_analytics: "UA-58263416-1"
+  - url: /homestead/
+    title: Homesteading
+  - url: /rv/
+    title: RV Life
+  - url: /about/
+    title: About M & A
+  - url: /where-we-went/
+    title: Our Travels

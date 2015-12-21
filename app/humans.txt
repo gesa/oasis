@@ -1,12 +1,11 @@
 ---
 ---
 /* TEAM */
-Author: {{ site.author.name }} <{{ site.author.email }}>
-Site: {{ site.name }} {{ site.url }}
-Twitter: {{ site.author.twitter }}
+{% for author in site.authors %}
+{{ author.name }}{% if site.author.email %} <{{ site.author.email }}>{% endif %}{% endfor %}
 
 /* SITE */
 Last update: {{ site.date | %F }}
 Standards: HTML5, CSS3, ES5
 Components: Jekyll
-Software: Jetbrains WebStorm
+Software: Jetbrains RubyMine
