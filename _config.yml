@@ -32,14 +32,14 @@ share:
 
 future: true
 show_drafts: true
-permalink: /:categories/:year:month:day/:title/
+permalink: /:categories/:year/:title/
 
 defaults:
   -
     scope:
       path: ''
     values:
-      layout: 'default'
+      layout: 'post'
 
 collections:
   root:

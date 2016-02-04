@@ -34,7 +34,7 @@ GEM
     jekyll-watch (1.3.0)
       listen (~> 3.0)
     json (1.8.1)
-    kramdown (1.4.1)
+    kramdown (1.9.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     liquid (3.0.6)
@@ -81,7 +81,7 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (~> 3.0, >= 3.0.1)
-  kramdown
+  kramdown (>= 1.9)
   travis (>= 1.7.1)
 
 BUNDLED WITH
