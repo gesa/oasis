@@ -155,7 +155,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['<%= site.app %>/_less/**/*.less'],
-        tasks: ['less:server']
+        tasks: ['less:css']
       },
       javascript: {
         files: [
