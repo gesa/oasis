@@ -1,6 +1,9 @@
 module.exports = function (grunt) {
-  require('time-grunt')(grunt);
-  require('jit-grunt')(grunt, {});
+  "use strict";
+
+  require('jit-grunt')(grunt, {
+    'cachebreaker': 'grunt-cache-breaker'
+  });
 
   grunt.initConfig({
     site: {
@@ -9,13 +12,39 @@ module.exports = function (grunt) {
     },
 
     clean: {
-      server: {
+      init: {
         files: [
           {
             dot: true,
             src: '<%= site.dist %>/*'
           }
         ]
+      }
+    },
+
+    copy: {
+      assets: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%= site.app %>',
+            src: ['img/**/*'],
+            dest: '<%= site.dist %>'
+          }
+        ]
+      }
+    },
+
+    less: {
+      css: {
+        options: {
+          compress: false,
+          sourceMap: true
+        },
+        files: {
+          '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
+        }
       }
     },
 
@@ -43,48 +72,15 @@ module.exports = function (grunt) {
       }
     },
 
-    copy: {
-      server: {
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: '<%= site.app %>',
-            src: [
-              'img/**/*',
-              '!**/_*{,/**}',
-              'favicon.ico',
-              'touch-icon-*.*'
-            ],
-            dest: '<%= site.dist %>'
-          }
-        ]
-      }
-    },
-
-    less: {
-      options: {
-        compress: true,
-      },
-      build: {},
-      server: {
-        files: {
-          '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
-        },
-        options: {
-          compress: false,
-          sourceMap: true
-        }
-      },
-      test: {}
-    },
-
-    autoprefixer: {
-      options: {
-        browsers: ['last 2 versions'],
-        map: true
-      },
+    postcss: {
       build: {
+        options: {
+          map: true,
+          processors: [
+            require('autoprefixer')({browsers: 'last 2 versions'}),
+            require('cssnano')()
+          ]
+        },
         files: [
           {
             expand: true,
@@ -95,44 +91,25 @@ module.exports = function (grunt) {
         ]
       }
     },
-    connect: {
-      server: {
-        options: {
-          base: '<%= site.dist %>',
-          hostname: '0.0.0.0',
-          port: 9001,
-          middleware: function (connect, options, middlewares) {
-            middlewares.unshift(function (request, response, next) {
-              response.setHeader('Access-Control-Allow-Origin', '*');
-              response.setHeader('Access-Control-Allow-Methods', '*');
-              return next();
-            });
-            return middlewares;
-          },
-          useAvailablePort: true
-        }
-      }
-    },
 
-    watch: {
-      images: {
-        files: ['<%= site.app %>/img/**/*.*'],
-        tasks: ['copy:server']
+    connect: {
+      options: {
+        hostname: '0.0.0.0',
+        port: 9084,
+        middleware: function (connect, options, middlewares) {
+          middlewares.unshift(function (request, response, next) {
+            response.setHeader('Access-Control-Allow-Origin', '*');
+            response.setHeader('Access-Control-Allow-Methods', '*');
+            return next();
+          });
+          return middlewares;
+        },
+        useAvailablePort: true
       },
-      less: {
-        files: ['<%= site.app %>/_less/**/*.less'],
-        tasks: ['less:server']
-      },
-      javascript: {
-        files: ['<%= site.app %>/_js/**/*.js'],
-        tasks: ['concat']
-      },
-      jekyll: {
-        files: [
-          '_*.*',
-          '<%= site.app %>/**/*.{xml,html,yml,md,mkd,markdown,txt}'
-        ],
-        tasks: ['jekyll:server', 'concurrent']
+      local: {
+        options: {
+          base: '<%= site.dist %>'
+        }
       }
     },
 
@@ -141,14 +118,15 @@ module.exports = function (grunt) {
         sourceMap: true,
         separator: grunt.util.linefeed + ';'
       },
-      server: {
+      scripts: {
         files: [
           {
             src: [
-              '<%= site.app %>/_js/modules/image-modals.js',
+              '<%= site.app %>/_js/modules/**/*.js',
+              '<%= site.app %>/_js/pages/**/*.js',
               '<%= site.app %>/_js/core.js'
             ],
-            dest: '<%= site.dist %>/js/scripts.js'
+            dest: '<%= site.dist %>/js/core.js'
           }
         ]
       }
@@ -162,20 +140,71 @@ module.exports = function (grunt) {
       },
       build: {
         files: {
-          '<%= site.dist %>/js/scripts.js': '<%= site.dist %>/js/scripts.js'
+          '<%= site.dist %>/js/core.js': '<%= site.dist %>/js/core.js'
         }
       }
     },
 
-    cssmin: {
-      options: {
-        sourceMap: true
+    watch: {
+      gruntfile: {
+        files: ['Gruntfile.js'],
+        tasks: ['dev'],
+        options: {
+          reload: true
+        }
       },
-      build: {
+      less: {
+        files: ['<%= site.app %>/_less/**/*.less'],
+        tasks: ['less:server']
+      },
+      javascript: {
+        files: [
+          '<%= site.app %>/_js/**/*.js'
+        ],
+        tasks: ['concat:scripts']
+      },
+      assets: {
+        files: ['<%= site.app %>/img/**/*'],
+        tasks: ['copy']
+      },
+      jekyll: {
+        files: [
+          '<%= site.app %>/**/*.{html,md,txt,xml}',
+          '<%= site.app %>/_data/**/*.*',
+          '<%= site.app %>/_plugins/**/*.rb',
+          '_config.*'
+        ],
+        tasks: ['jekyll:server']
+      }
+    },
+
+    cachebreaker: {
+      deploy: {
+        options: {
+          match: [
+            'core.js',
+            'core.css'
+          ]
+        },
         files: {
-          '<%= site.dist %>/css/core.css': '<%= site.dist %>/css/core.css'
+          src: [
+            '<%= site.dist %>/**/*.html'
+          ]
         }
       }
+    },
+
+    concurrent: {
+      compile: [
+        'copy:assets',
+        'less:css',
+        'concat:scripts'
+      ],
+      build: [
+        'postcss:build',
+        'uglify:build',
+        'cachebreaker:deploy'
+      ]
     },
 
     jshint: {
@@ -209,22 +238,6 @@ module.exports = function (grunt) {
       }
     },
 
-    csscss: {
-      options: {
-        bundleExec: true,
-        ignoreSassMixins: true,
-        //ignoreProperties:'',
-        //ignoreSelectors: '',
-        minMatch: 4,
-        verbose: true
-      },
-      check: {
-        src: [
-          '<%= site.app %>/_less/core.less'
-        ]
-      }
-    },
-
     csslint: {
       options: {
         csslintrc: '.csslintrc'
@@ -234,41 +247,31 @@ module.exports = function (grunt) {
           '<%= site.dist %>/css/core.css'
         ]
       }
-    },
-
-    concurrent: {
-      server: [
-        'copy:server',
-        'less:server',
-        'concat'
-      ]
     }
+
   });
 
   grunt.registerTask('dev', [
-    'clean:server',
+    'clean:init',
     'jekyll:server',
-    'concurrent:server',
-    'connect',
+    'concurrent:compile',
+    'connect:local',
     'watch'
   ]);
 
   grunt.registerTask('build', [
-    'clean:server',
+    'clean:init',
     'jekyll:build',
-    'concurrent:server',
-    'autoprefixer:build',
-    'uglify:build',
-    'cssmin:build'
+    'concurrent:compile',
+    'concurrent:build'
   ]);
 
   grunt.registerTask('test', [
     'jekyll:check',
     'jshint:all',
     'jsbeautifier:verify',
-    'csscss:check' //,
-    //'less:server',
-    //'csslint:check'
+    'csscss:check',
+    'csslint:check'
   ]);
 
   grunt.registerTask('precommit', [

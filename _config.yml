@@ -1,7 +1,11 @@
-#######################
-# Config: Development #
-#######################
-# (production settings go in _config.build.yml)
+#################################################
+# Config: Development                           #
+#################################################
+# (production settings go in _config.build.yml) #
+
+#############
+# Meta info #
+#############
 
 name: The Curious Sage Adventure
 url: 'http://curioussage.com'
@@ -15,46 +19,42 @@ authors:
     twitter: gesa
     twitterid: 9321562
   - name: Mark
+
 share:
   width: 1200
   size: 1200
   image: 'img/share.jpg'
   twitterText: These two fools went on an adventure.
 
-exclude: ['img']
-
-###########
-# Content #
-###########
+#############
+# Authoring #
+#############
 
 future: true
 show_drafts: true
 permalink: /:categories/:year:month:day/:title/
-
-#############
-# Compiling #
-#############
-
-highlighter: rouge
-
-markdown: kramdown
-kramdown:
-  auto_ids: true
-#  input: GFM
 
 defaults:
   -
     scope:
       path: ''
     values:
-      layout: 'post'
+      layout: 'default'
 
-navigation:
-  - url: /homestead/
-    title: Homesteading
-  - url: /rv/
-    title: RV Life
-  - url: /about/
-    title: About M & A
-  - url: /where-we-went/
-    title: Our Travels
+collections:
+  root:
+    output: true
+    permalink: /:title
+
+#############
+# Compiling #
+#############
+
+exclude:    ['css', 'js', 'img']
+keep_files: ['css', 'js', 'img']
+
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+  input: GFM

@@ -1,7 +1,7 @@
 <header class="main-header">
   <h1><a href="/">Adventures of Curious Sage</a></h1>
   <nav>
-    {% for page in site.navigation %}
-    <a href="{{ page.url }}">{{ page.title }}</a>{% endfor %}
+    {% for category in site.categories %}
+    <a href="/{{ category[0] }}/">{{ category[0] | replace: '-', ' ' | capitalize }}</a>{% endfor %}
   </nav>
 </header>
