@@ -35,26 +35,38 @@ show_drafts: true
 permalink: /:categories/:year/:title/
 
 defaults:
-  -
-    scope:
+  - scope:
       path: ''
     values:
-      layout: 'post'
+      layout: post
+  - scope:
+      path: ''
+      type: root
+    values:
+      layout: none
+  - scope:
+      path: ''
+      type: static
+    values:
+      layout: default
 
 collections:
   root:
     output: true
     permalink: /:title
+  static:
+    permalink: /:path/
+    output: true
 
 #############
 # Compiling #
 #############
 
-exclude:    ['css', 'js', 'img']
+exclude:    ['img']
 keep_files: ['css', 'js', 'img']
 
 highlighter: rouge
 markdown: kramdown
 kramdown:
-  smart_quotes: ["apos", "apos", "quot", "quot"]
+  smart_quotes: ['apos', 'apos', 'quot', 'quot']
   input: GFM

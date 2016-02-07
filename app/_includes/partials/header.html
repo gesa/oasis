@@ -3,5 +3,7 @@
   <nav>
     {% for category in site.categories %}
     <a href="/{{ category[0] }}/">{{ category[0] | replace: '-', ' ' | capitalize }}</a>{% endfor %}
+    {% for page in site.static %}
+    <a href="{{ page.url | replace: 'index.html', '' }}">{{ page.title }}</a>{% endfor %}
   </nav>
 </header>
