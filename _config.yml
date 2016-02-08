@@ -13,12 +13,15 @@ description: What the hell are you two going to do with 28 acres and an RV, anyw
 timezone: America/Los_Angeles
 googleanalytics: UA-26097728-8
 authors:
-  - name: Aki Rose
+  aki:
+    name: Aki Rose
     email: hi@akiro.se
     github: gesa
     twitter: gesa
     twitterid: 9321562
-  - name: Mark
+  mark:
+    name: Mark
+    email: nope@curioussage.com
 
 share:
   width: 1200

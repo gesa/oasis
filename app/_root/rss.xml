@@ -1,0 +1,40 @@
+---
+---
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <link>{{ site.url }}</link>
+    <title>{{ site.name }}</title>
+    <description>{{ site.description }}</description>
+    <language>en-US</language>
+    <copyright>¯\_(ツ)_/¯</copyright>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <generator>Jekyll v3.1.1</generator>
+    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <ttl>720</ttl>
+    <image>
+      <url>{{ site.url }}/img/share.jpg</url>
+      <title>{{ site.name }}</title>
+      <description>A photo of a cactus</description>
+      <link>{{ site.url }}</link>
+      <width>1198</width>
+      <height>1199</height>
+    </image>
+    <atom:link href="{{ site.url }}{{ page.url }}" rel="self" type="application/rss+xml" />
+    {% assign all_the_pages = site.documents | reverse %}
+    {% for page in all_the_pages %}{% if site.data.sitemap contains page.url or page.published == false %}
+    {% else %}
+      {% if page.collection == 'posts' %}
+      <item>
+        <title>{{ page.title }}</title>
+        <link>{{ site.url }}{{ page.url }}</link>
+        <description>{{ page.excerpt | strip_html}}</description>
+        <author>{{ site.authors[page.author].email }}</author>
+        {% if page.categories %}<category>{{ page.categories[0] }}</category>{% endif %}
+        <guid isPermalink="true">{{ site.url }}{{ page.id }}</guid>
+        {% if page.date %}<pubDate>{{ page.date | date_to_rfc822 }}</pubDate>{% endif %}
+        <source url="{{ site.url }}/rss.xml">{{ site.name }}</source>
+      </item>
+    {% endif %}{% endif %}{% endfor %}
+  </channel>
+</rss>
