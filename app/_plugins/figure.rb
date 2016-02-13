@@ -23,18 +23,25 @@ module Jekyll
 
         @caption = attributes['caption']
         @class = attributes['class']
+        @html_id = attributes['id']
 
         # Caption: convert markdown and remove paragraphs
         unless @caption.nil?
           figure_caption = @caption.gsub!(/\A"|"\Z/, '')
-          figure_caption = converter.convert(figure_caption).gsub(/<\/?p[^>]*>/, '').chomp
+          figure_caption = converter.convert(figure_caption).chomp
           figure_caption = "  <figcaption>#{figure_caption}</figcaption>\n"
         end
 
         # Class name(s)
         unless @class.nil?
           figure_class = @class.gsub!(/\A"|"\Z/, '')
-          figure_class = " class\=\"#{figure_class}\""
+          figure_class = " class=\"#{figure_class}\""
+        end
+
+        # Class name(s)
+        unless @html_id.nil?
+          figure_id = @html_id.gsub!(/\A"|"\Z/, '')
+          figure_id = " id=\"#{figure_id}\""
         end
 
         # Content: convert markdown and remove paragraphs containing images
@@ -44,7 +51,7 @@ module Jekyll
         markdown_escape = "\ "
 
         # Render <figure>
-        figure_tag =  "<figure#{figure_class}>"
+        figure_tag =  "<figure#{figure_class}#{figure_id}>"
         figure_tag += "#{figure_main}\n"
         figure_tag += "#{figure_caption}"
         figure_tag += "</figure>"
